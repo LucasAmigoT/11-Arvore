@@ -10,6 +10,7 @@ struct NO {
 
 NO* raiz = NULL;
 
+
 // headers
 // estrutura principal
 void menu();
@@ -28,6 +29,7 @@ NO* criaNO(int valor);
 int elementosArvore(NO* no);
 void exibirElementosArvore(NO* no);
 void buscarElementoArvore(NO* no, int valor);
+bool buscarElemento(NO* no, int valor);
 //--------------------------
 
 
@@ -78,7 +80,7 @@ void menu()
 void inicializar()
 {
 
-	// provisÛrio porque n„o libera a memoria usada pela arvore
+	// provis√≥rio porque n√£o libera a memoria usada pela arvore
 	NO* raiz = NULL;
 
 	cout << "Arvore inicializada \n";
@@ -114,7 +116,13 @@ void buscar() {
 	int valor;
 	cout << "Digite o elemento: ";
 	cin >> valor;
-	buscarElementoArvore(raiz, valor);
+	
+	if (buscarElemento(raiz, valor)) {
+		cout << "elemento encontrado" << endl;
+	}
+	else {
+		cout << "Valor nao encontrado." << endl;
+	}
 }
 
 
@@ -177,9 +185,15 @@ void exibirElementosArvore(NO* no)
 
 }
 
-void buscarElementoArvore(NO* no, int valor)
+bool buscarElemento(NO* no, int valor)
 {
-
+	if (no == NULL ){
+		return false;
+	}
+	if (no->valor == valor) {
+		return true;
+	}
+	return buscarElemento(no->esq, valor) || buscarElemento(no->dir, valor);
 
 }
 
